@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Three months..."
+date: 2017-02-11 23:24:29 +0530
+comments: true
+categories: [Blog, Life]
+---
+
+It's been 3 months since I've blogged. *A lot* can happen in 3 months. Someone who was once close to you could leave you, your dad could lose his job (trembling your financial support), you could get to the point when you'll no longer want your bachelor's degree, etc.
+
+In the midst of this, wonderful things can happen too - you could get invited to the awesome [Mozilla "All Hands!"](https://wiki.mozilla.org/All_Hands/2016_Hawaii), where you get to see [all kinds of interesting people](https://www.flickr.com/photos/mozillaallhands/sets/72157673850712094/with/31521175206/) from allover the world (including the ones you've been chatting in IRC), you get to hang out with them, you get to live with them for a week, FUN!!! [^1]
+
+And, once you get back, you get the promise of a *superior* distraction - a nice little project that could keep you distracted for months!
+
+You see? Balance!
+
+Anyway, I've planned to write a bunch of posts about my work in bioinformatics, especially the project I'm involved in right now. I'll make sure that they'll be interesting by having a mixture of bio-stuff and coding. See you until then...
+
+[^1]: Well, you could also get allergic to sea food (lobster, in my case) and get "hives", but *meh*...
