@@ -6,7 +6,7 @@ comments: true
 categories: [Stylo, Servo, Coding]
 ---
 
-While my [new job]({{site.url}}/blog/2016/07/12/new-job-new-field/) demands writing backend tools in Rust, I get a lot of free time every once in a while, when I fiddle around Servo's code. Lately, I got interested in [Stylo](https://wiki.mozilla.org/Stylo).
+While my [new job]({{site.url}}/2016/07/12/new-job-new-field/) demands writing backend tools in Rust, I get a lot of free time every once in a while, when I fiddle around Servo's code. Lately, I got interested in [Stylo](https://wiki.mozilla.org/Stylo).
 
 Stylo is interesting enough for it to need a whole writeup about itself, but this post is just about an easy stylo bug, which then turned slightly *ugly*. Well, it's no big deal, since developers usually deal with this kind of thing every day, but since it's an easy bug, I thought it might give some ideas to the newcomers (to stylo) about where to look when hacking on stylo, and to keep pushing and **not give up** if an easy issue becomes less easy...
 

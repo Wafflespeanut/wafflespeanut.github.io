@@ -6,7 +6,7 @@ comments: true
 categories: [Bioinformatics, Job]
 ---
 
-You may already know that [my work in bioinformatics]({{site.url}}/blog/2016/07/12/new-job-new-field/) is mostly, well, *research*. All these months, I've been writing little tools in Rust (things that help speed up some *boring* analysis). These days, I'm involved in something new, something *very interesting!* Before we get into all that, I'll try to give a general overview of the flow of data (without going way too much into biology), what kinds of data we deal with, how we analyze it, where I come in, etc., starting from this post.
+You may already know that [my work in bioinformatics]({{site.url}}/2016/07/12/new-job-new-field/) is mostly, well, *research*. All these months, I've been writing little tools in Rust (things that help speed up some *boring* analysis). These days, I'm involved in something new, something *very interesting!* Before we get into all that, I'll try to give a general overview of the flow of data (without going way too much into biology), what kinds of data we deal with, how we analyze it, where I come in, etc., starting from this post.
 
 <!-- more -->
 

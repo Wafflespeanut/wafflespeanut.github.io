@@ -6,7 +6,7 @@ comments: true
 categories: [Python, Rust]
 ---
 
-Last time, I talked about [my experience with Rust as a newbie]({{site.url}}/blog/2015/07/05/a-pythonist-getting-rusty-these-days-part-1/). Today, I'll try to explain the hard time I had with the [FFI](http://en.wikipedia.org/wiki/Foreign_function_interface). Well, I shouldn't have gone into it, but I needed that for communication with Python[^1].
+Last time, I talked about [my experience with Rust as a newbie]({{site.url}}/2015/07/05/a-pythonist-getting-rusty-these-days-part-1/). Today, I'll try to explain the hard time I had with the [FFI](http://en.wikipedia.org/wiki/Foreign_function_interface). Well, I shouldn't have gone into it, but I needed that for communication with Python[^1].
 
 FFI was *hard*, because I can't quite guess what happens along the way. Errors don't mean much, which means that I can get the results only during runtime (and then figure out whether it's the cake I want or not). Then, there's this *interesting* problem of memory safety. Rust is specifically designed to be memory safe, but most of the other languages (especially "C") aren't. Python, being a descendant of C, can only speak "C" at its low level. So, Rust *has* to speak C if it wants to communicate with Python.
 

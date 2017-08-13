@@ -5,7 +5,7 @@ author: Ravi Shankar
 email: wafflespeanut@gmail.com
 description:
 
-url: "https://stuff.waffles.space"
+url: "https://blog.waffles.space"
 twitter_username: wafflespeanut
 github_username:  wafflespeanut
 
@@ -14,7 +14,7 @@ theme: minima
 plugins:
   - jekyll-feed
 
-permalink: /blog/:year/:month/:day/:title/
+permalink: /:year/:month/:day/:title/
 
 disqus:
     shortname: wafflespeanut
