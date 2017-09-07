@@ -8,7 +8,7 @@ categories: [Python, Coding, Leisure]
 
 Every once in a while, I get a (seemingly) nice and interesting idea (thanks to a wonderful female creature, who's always been my *muse*), and whenever I get one, I go straight to researching more about it, allocating most of my free time, so that I finish it up ASAP and show it to her. Last time, it was a [CSS spewing thingy](https://github.com/wafflespeanut/AISH). This time, it was about generating an ASCII sketch of a picture.
 
-I'm sure you'd have seen all those "Image to ASCII converter", "ASCII art generator", and all sorts of boring variants of this online. But, I'll tell you where they all fail and how I managed to bring up a decent sketch in ASCII. It took me about 3 hours to come up with a basic sketch, and then a few more for making it more generic and [launching it in Heroku](https://ascii-gen.herokuapp.com/).
+I'm sure you'd have seen all those "Image to ASCII converter", "ASCII art generator", and all sorts of boring variants of this online. But, I'll tell you where they all fail and how I managed to bring up a decent sketch in ASCII. It took me about 3 hours to come up with a basic sketch, and then a few more for making it more generic and [deploying it in my website](https://waffles.space/ascii-gen/).
 
 <!-- more -->
 
@@ -143,7 +143,7 @@ Looks like we've *narrowed down* more than enough details to get the ASCII art! 
 
 And, *voila!*
 
-As a sidenote, you're very welcome to play with [my ASCII art generator](https://ascii-gen.herokuapp.com/), which does whatever I'd just shown you above.
+As a sidenote, you're very welcome to play with [my ASCII art generator](https://waffles.space/ascii-gen/), which does whatever I'd just shown you above.
 
 See you next time!
 
