@@ -3,7 +3,7 @@ layout: post
 title: "A Pythonist getting Rusty these days... (Part 1)"
 date: 2015-07-05 20:39:06 +0530
 comments: true
-categories: [Python, Rust]
+categories: [Python, Rust, Coding]
 ---
 
 Though I've been playing with Python and JS for a while, getting into systems programming is something I've always wanted to do. The increased talks about Rust in the IRC (over the last few months), followed by the release of Rust 1.0 gave me a kickstart, which dragged me into it about two weeks back.

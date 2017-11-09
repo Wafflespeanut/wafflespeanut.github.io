@@ -3,7 +3,7 @@ layout: post
 title: "My New Blog!"
 date: 2015-06-23 03:52:10 +0530
 comments: true
-categories: Blog
+categories: [Blog]
 ---
 
 I've been a wordpress blogger for over two years now. My previous blog [Arrow of time](https://wafflescrazypeanut.wordpress.com) was actually meant for writing about Physics (among other random stuff). It was a success, and I had a great time blogging. But nowadays, I'm more interested in code (than in Physics) and so, I think it's time to move on.

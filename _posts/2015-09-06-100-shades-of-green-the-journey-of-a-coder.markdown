@@ -3,7 +3,7 @@ layout: post
 title: "100 shades of green: The journey of a coder..."
 date: 2015-09-07 18:33:18 +0530
 comments: true
-categories: Coding
+categories: [Coding, Life]
 ---
 
 I've been coding for about a year now. I've danced with Python *(a lot!)* and nowadays, I'm playing with Rust, although I've also done some basic C & Javascript. Anyways, I get a lot of questions from my fellow undergrads about how I got into coding in the first place, and yesterday, [Manish](https://manishearth.github.io/) gave me the idea to blog about it.

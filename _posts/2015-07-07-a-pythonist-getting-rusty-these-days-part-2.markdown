@@ -3,7 +3,7 @@ layout: post
 title: "A Pythonist getting Rusty these days... (Part 2)"
 date: 2015-07-08 18:17:58 +0530
 comments: true
-categories: [Python, Rust]
+categories: [Python, Rust, Coding]
 ---
 
 Last time, I talked about [my experience with Rust as a newbie]({{site.url}}/2015/07/05/a-pythonist-getting-rusty-these-days-part-1/). Today, I'll try to explain the hard time I had with the [FFI](http://en.wikipedia.org/wiki/Foreign_function_interface). Well, I shouldn't have gone into it, but I needed that for communication with Python[^1].

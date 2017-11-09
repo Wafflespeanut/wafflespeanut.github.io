@@ -3,7 +3,7 @@ layout: post
 title: "An easy bug in Stylo..."
 date: 2016-10-05 08:30:34 +0530
 comments: true
-categories: [Stylo, Servo, Coding]
+categories: [Servo, Coding, Rust]
 ---
 
 While my [new job]({{site.url}}/2016/07/12/new-job-new-field/) demands writing backend tools in Rust, I get a lot of free time every once in a while, when I fiddle around Servo's code. Lately, I got interested in [Stylo](https://wiki.mozilla.org/Stylo).

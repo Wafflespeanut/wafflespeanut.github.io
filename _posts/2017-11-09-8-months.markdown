@@ -1,0 +1,54 @@
+---
+layout: post
+title: "8 months..."
+date: 2017-11-09 21:21:47 +0530
+comments: true
+categories: [Life, Job]
+---
+
+It's been a while since I blogged. Last few months have been... well, *complicated*. Now that I'm travelling, I won't get a better chance to tell the story.
+
+As far as the world knows, I've been writing some Rust and Python code for some bioinformatics company (which is one of the few companies using Rust in production in South India). Job was good until the start of this year. As time flew, the folks who run the company made some fuckups - they introduced new rules, they kept postponing the product release, and eventually, I got tired of researching stuff for them.
+
+So, I got back into open-source and started looking for a new job.
+
+<!-- more -->
+
+## Job hunt
+
+Job hunting was **hard**, especially with my experience. Back then, it was only a year since I began writing production code. Almost everyone's looking for senior developers with 3-5 years of experience in PHP or Node or whatever.[^1] The rest who look for junior/mid-level devs either didn't respond, or rejected with an automated mail - which I understand, they get a lot of traffic, they can't hire everyone!
+
+I longed for a human response, even if it was a rejection. Because, I don't simply go around and bulk apply for all the jobs that I could find! I take my time - only if I'm convinced that I *might* be a good fit for their open position, I tailor my email and send it to them.
+
+Out of the 57 companies I'd applied in 2 months, 8 rejected with an automated mail (it's funny to think that one company rejected me after 3 months), 6 rejected because I wasn't around their location (which they didn't specify in the job listing), 3 rejected after technical round (I hate competitive coding, really!), and the rest **never replied!**
+
+Meanwhile, I was working on Servo stuff. [I wrote the parsing and serialization code](https://github.com/servo/servo/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Awafflespeanut%20grid) for CSS grid (for [Stylo](https://wiki.mozilla.org/Quantum/Stylo)). I rewrote a [bot as a Github integration](https://github.com/servo-automation/highfive/) and added some cool features for it, and I was one of the coaches for two girls who participated in [RGSoC 2017](https://teams.railsgirlssummerofcode.org/teams/511).
+
+## Into a YC startup
+
+Around mid-May, @Manishearth [linked me to a tweet](https://twitter.com/OmnijarStudio/status/865072706550718464) which claimed that some startup called "Surematics" is looking to hire Rust devs. I applied, wrote some code, had a chat with the CTO (Phil) and CEO (when I also realized that the startup is part of YCombinator's 2017 summer batch), booked my flights, and by June, I was in Mountain View on a 3-month contract (with a possible employment after demo day). It all happened quite fast!
+
+My stack was totally new! Typescript for frontend, Rust for backend services, Kubernetes (in Azure) for orchestrating the microservices, and some cool new technologies like [docker](https://www.docker.com/), [vault](https://www.vaultproject.io/), [etcd](https://coreos.com/etcd/) and [cockroach](https://www.cockroachlabs.com/). The learning curve was *huge!*
+
+What surprised me was the fact that we're in YC's batch **without a product!** I've been told that YC usually funds and guides startups which already have a product that's being used by some clients. In our case, we didn't even have a proper layout of the product!
+
+Anyway, we'd planned to deliver something usable every week, but we couldn't, because (in short) the goals/decisions kept changing, and we went on hacking stuff just to achieve those goals (which eventually kicked us in our asses). While I'd love to talk about this, it's a big story, which Phil has summarized in [a lovely series of posts](https://hackernoon.com/through-the-looking-glass-part-i-2a710a865c67).
+
+In the end, the startup merged with another company, and we all had to handover our work and go home. The irony is that, by that point, we had a nice working version of the product (because we'd been coding for 2 days straight!), but it didn't matter.
+
+In my last few days at CA, I was mostly enjoying. But, aside that, I bought a new domain, [designed my website](https://github.com/wafflespeanut/waffles.space), and launched it along with my projects in DigitalOcean. Now, I have a customized static server in Rust, my projects, Servo's bots - all in docker containerized environments in CoreOS machines.
+
+## Post-YC life
+
+My post-YC project was a [bot library](https://github.com/OmnijarBots/beryllium) for the [Wire messenger](https://wire.com/en/) in Rust,[^2] which actually took me into the async features of Rust for the first time. It was fun!
+
+After some latency period, I began hunting for jobs again. Now, things were easy (probably because of the YC stunt). I got through some interviews and got some cool offers, but in the end, I rejected those because I got a better offer from Phil (the one who hired me for Surematics). He'd hooked me up with a Finnish startup, where I get to be a full-stack developer again! Only difference is that this time, I'll be working on Swift along with Typescript and Rust.
+
+My contract officially began this month, and I'm already enjoying it, because my work (right now) is mostly on FFI-bridging Swift and Rust (dark arts!). I'll try to write up a technical post on this.
+
+Anyway, last few months were interesting. Glad to be back now!
+
+
+[^1]: And yeah, **I hate 'em both!** There, I said it.
+
+[^2]: Well, they had a lot of libraries in Rust, but this particular SDK was in Node and Java, so I went ahead and took this project!

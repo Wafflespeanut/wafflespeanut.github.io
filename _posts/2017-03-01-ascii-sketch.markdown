@@ -3,7 +3,7 @@ layout: post
 title: "Drawing an ASCII sketch"
 date: 2017-03-01 00:46:53 +0530
 comments: true
-categories: [Python, Coding, Leisure]
+categories: [Python, Coding]
 ---
 
 Every once in a while, I get a (seemingly) nice and interesting idea (thanks to a wonderful female creature, who's always been my *muse*), and whenever I get one, I go straight to researching more about it, allocating most of my free time, so that I finish it up ASAP and show it to her. Last time, it was a [CSS spewing thingy](https://github.com/wafflespeanut/AISH). This time, it was about generating an ASCII sketch of a picture.
