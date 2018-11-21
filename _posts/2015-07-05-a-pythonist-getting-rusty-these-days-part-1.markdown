@@ -141,7 +141,7 @@ It's reasonable if you think about it. It's a great way to prevent data races. T
 
 As far as I've seen, Rust offers various kinds of interesting options to easily get around most of the complex situations. For all the high-level coders out there, if you've always wanna get into systems programming, then I suggest "Rust" as a nice start!
 
-<small>Thanks to Manish for reviewing this post and thanks to all the *Rustaceans* who helped me whenever I got into the [#rust](https://botbot.me/mozilla/rust/) channel at IRC. For more, see the [discussion about this post](https://www.reddit.com/r/rust/comments/3c7r1l/a_pythonist_getting_rusty_these_days/) on Reddit.</small>
+<small>Thanks to [Manish](https://twitter.com/ManishEarth) for reviewing this post and thanks to all the *Rustaceans* who helped me whenever I got into the [#rust](https://botbot.me/mozilla/rust/) channel at IRC. For more, see the [discussion about this post](https://www.reddit.com/r/rust/comments/3c7r1l/a_pythonist_getting_rusty_these_days/) on Reddit.</small>
 
 [^1]: It *was* a very basic thing. It just wrote the stories into files, and my encryption scheme was nothing but a hexed shifting cipher. It was pathetic [until about a month back](https://github.com/wafflespeanut/scripts/blob/8850c831c10955b5c32d2710abfbfef916031792/Memorandum/Diary.py).
 

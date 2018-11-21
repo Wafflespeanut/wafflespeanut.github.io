@@ -84,7 +84,7 @@ Also, since I'd gone for a high-level language (Python), I didn't have to worry 
 
 Nowadays, I'm involved in the [Servo browser engine](https://github.com/servo/servo), to learn more about Rust, which gets pretty exciting every day. And, while I'm playing with Rust, I've also got back into C, because firstly, I've realized the power of these low-level languages (plus, C doesn't have any abstractions at all!), and secondly, I'm about to finish my college and industries only know about established languages like C/C++/Java. So, I gotta learn one of those to get a job *(sigh)*.[^6]
 
-<small>Thanks to Manish for *patiently* reviewing this post...</small>
+<small>Thanks to [Manish](https://twitter.com/ManishEarth) for *patiently* reviewing this post...</small>
 
 [^1]: If you'd grown in my locality (in your childhood), then all you know is that a computer (which you often see in school) is *"something"* where you can only type, draw, and play games - nothing more! I'm not embarrassed to say that we were never curious!
 

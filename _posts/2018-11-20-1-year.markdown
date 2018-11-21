@@ -1,0 +1,46 @@
+---
+layout: post
+title: "1 year..."
+date: 2018-11-20 15:40:26 +0530
+comments: true
+categories: [Life, Job]
+---
+
+It's been a year since I've blogged, despite [people reminding me](https://manishearth.github.io/blog/2018/08/26/why-i-enjoy-blogging/) that blogging [is a good thing](https://myrrlyn.net/blog/misc/to-all-the-posts-ive-blogged-before) and that it helps in the longer run. I had at least 3 posts in mind over the past few months, but I kept procrastinating on them. I now realize that if I keep doing that, then I might just as well stop blogging.
+
+So, I've planned to blog about two topics by the end of this year:
+
+1. Experience report on using Swift for a year from a Rustacean's perspective (what I liked, what I feared about, what I hated, etc.).
+2. Building a HTTP (+ TLS) server from scratch using NIO ([Swift NIO](https://github.com/apple/swift-nio) is a low-level framework for building network applications, which has built-in support for event loops, futures, HTTP/2, etc.).
+
+Firstly, here's the story of my 2018 projects...
+
+<!-- more -->
+
+## Building services for a client
+
+Although my job began with the promise of working on Rust (FFI-bridging Rust and Swift), we had to move to Swift in a few days, because it felt easy and productive to build web services in a managed language like Swift compared to Rust (that said, we do use Rust for other things - our infrastructure, for example).
+
+[Our studio](https://omnijar.studio/) had one goal - build open-source, decentralized web and e-commerce platforms, which are free, intuitive, and easy-to-use (and are [**now open for early access!**](https://naamio.cloud/)). My colleague (our technical lead and director) was working on the web platform, and me on the e-commerce thingy.
+
+We got a client who wanted to move away from their Wordpress stack and start using our platforms (especially for e-commerce, as they were selling coffee-related products). The problem was that they had no developers, and my colleagues only had time for the ongoing projects in our studio (so they were unavailable to commit full-time).
+
+Our agreement was that I would work full-time (as a full stack developer), our designer would be contracted for a few days every month, our director would be spending 3 days every week for them (code review, meetings, sprint planning, etc.), and that they should hire developers along the way, because it's simply too much work for one person to accomplish in the given time frame (2 months).
+
+Moreover, we need to polish our platforms every now and then, because the whole point of joining them was for mutual benefit - they get our services, and we use their data to improve our platform (not to mention that we also had to add features specifically *for* them).
+
+After a while, they ended up extending their milestone (3 more months), but they never hired any developer to support us. After 2 months, I was still lagging behind. I was already spending my weekends on our platform, and the last thing I wanted was to spend 12+ hours on their frontend implementing *features*. With only one month left to go, stressed by the sprint features, deadlines and a ton of broken things to fix, I knew that I was gonna hate working on frontends eventually.
+
+And then, it happened.
+
+They hadn't paid us for 5 months already (we kept reminding them, they kept postponing it), and when we reminded them about it (in 4 months), we got a message saying that **they weren't gonna pay us** until we finish the platform. Firstly, they breached our contract by saying this, which means we're free to pursue other clients and work on our own projects, and second, we knew that it's gonna take more time to finish their platform, and if we continued to spend time for them, our studio will run out of money.
+
+## Aftermath
+
+As for me, that's one more failed startup (in addition to [what happened last year](/2017/11/09/8-months/#into-a-yc-startup)).
+
+We stopped working for them (waiting on them to pay their debts) and resumed our work on the platform. We [launched it](https://naamio.cloud/) for early access users and it's registered as a separate company (which makes me... a cofounder!).
+
+We've got two more clients now, for whom we'll be building (non-Naamio) applications over the next year, and fund Naamio with that money. Let's see how that goes...
+
+<small>Thanks to [Phil](https://twitter.com/HelloFillip) for reviewing this post...</small>
