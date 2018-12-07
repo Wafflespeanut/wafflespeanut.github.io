@@ -48,7 +48,6 @@ My contract officially began this month, and I'm already enjoying it, because my
 
 Anyway, last few months were interesting. Glad to be back now!
 
-
 [^1]: And yeah, **I hate 'em both!** There, I said it.
 
 [^2]: Well, they had a lot of libraries in Rust, but this particular SDK was in Node and Java, so I went ahead and took this project!
