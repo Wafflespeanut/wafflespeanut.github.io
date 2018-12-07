@@ -370,12 +370,14 @@ In the above example, if we wish to find `39`, then all we have to do is find th
 4. Mask values
 
 ---------------------------------------------     ------------
-| 00000000 | 00000000 | 00000001 | 00000000 | ... | 00000000 |
+|    0     |    0     |    1     |    0     | ... |    0     |
 ---------------------------------------------     ------------
                          (true)
 ```
 
-So, we have the results! Now, all we need to do is check whether the byte is set, and if it is, then compare the actual key against the querying key (for equality), find the corresponding value, and we'll land on `(39, 8)`.
+After masking, we actually get an integer, because the final result for each group is either `0` or `1`, which could all be accumulated into an integer. In other words, the value and position of each bit in the returned integer corresponds to a match of a slot in the group.
+
+So, we have the results! Now, all we need to do is check the indices of bits that are set in the final integer, compare the key(s) in those slots against the querying key (for equality), find the corresponding value, and we'll land on `(39, 8)`.
 
 ### Hints to compiler!
 
