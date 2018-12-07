@@ -12,7 +12,7 @@ While the integration is still ongoing, there's currently no blog post out there
 
 <!-- more -->
 
-# Hashing and Hashmaps
+## Hashing and Hashmaps
 
 In order to establish some terminology, I'm gonna start from scratch. If you know about hashing, hashmaps, open-addressing and cache performance in general, feel free to [skip this section](#robin-hood-hashing).
 
@@ -28,9 +28,9 @@ Hashmaps use arrays as their backend. In the context of hashmaps, the array elem
  value |     |     |     |     |
 ```
 
-> The *value* here represents the value of the array's element in that index (usually, it's the K/V pair as a whole!). We'll also represent K/V pairs as 2-tuples.
+> The *value* here is the array's element in that index (usually, it's the key/value pair as a whole!).
 
-This array has 4 slots (it could be just one!). We wish to insert a K/V pair `(4, 8)`, for which we use a hash function `H(x)`. In order to find the index at which the K/V pair should be inserted, the **key is hashed** using the hash function `H(K)`, and the index is obtained by modulo'ing the hash using the length of the array.
+This array has 4 slots (it could be just one!). We wish to insert a key/value pair `(4, 8)`, for which we use a hash function `H(x)`. In order to find the index at which the key/value pair should be inserted, the **key is hashed** using the hash function `H(K)`, and the index is obtained by modulo'ing the hash using the length of the array.
 
 ```
 H(4) = 12638164110811449565
@@ -39,7 +39,7 @@ i = H(4) % 4 = 3
 
 For the sake of keeping this post simple, I've used an *unspecified* hash function[^2] (so don't worry about it) - only the actual hashes matter as far as we're concerned. And, note that the hash is 64 bits - we'll be sticking with this size throughout the post. Again for simplicity, we're only focusing on 64-bit machines.
 
-Anyway, now that we've found the index of the bucket, let's insert the K/V pair. Our array now looks like this:
+Anyway, now that we've found the index of the bucket, let's insert the key/value pair. Our array now looks like this:
 
 ```
  index |  0  |  1  |  2  |  3  |
@@ -47,11 +47,13 @@ Anyway, now that we've found the index of the bucket, let's insert the K/V pair.
  value |     |     |     | 4,8 |
 ```
 
-But, why did we have to add both the key and value, instead of just the value?
+But, why did we have to add both the key and value `(4, 8)`, instead of just the value `8`?
 
-## Dealing with collisions
+### Dealing with collisions
 
-Right now, for performing an operation on a K/V pair in the map, we *find* it by following the same steps - hash the key, modulo `N`, land on the index and perform the desired action. Hashing functions, despite that they have an entire 64-bit, encounter hash collisions. By doing the *modulo* operation, we've greatly reduced their range. Let's try inserting `(8, 2)` into our map;
+Right now, for performing an operation on a key/value pair in the map, we *find* it by following the same steps - hash the key, modulo `N`, land on the index and perform the desired action.
+
+Hashing functions, despite that they have a whole 8 bytes, encounter hash collisions. By doing the *modulo* operation, we've greatly reduced their range. Let's try inserting `(8, 2)` into our map;
 
 ```
 H(8) = 12638161911788193143
@@ -60,7 +62,7 @@ i = H(8) % 4 = 3
 
 But, we already have an element at index 3!
 
-In order to deal with these collisions, we group similar data together. One way is to have a linked list **per slot**. Now, our map will look like:
+In order to deal with these collisions, we group similar data together. One way is to assign a linked list to **each bucket**. Now, our map will look like:
 
 ```
  index |  0  |  1  |  2  |  3  |
@@ -75,7 +77,7 @@ In order to deal with these collisions, we group similar data together. One way 
 
 ... and when we wish to find an element, we stop at the bucket, traverse through the linked list and **compare the keys** for locating the value. This method of using another data structure for storing the values in each bucket is called *separate chaining*. So, if we keep getting collisions for subsequent insertions, our linked list will get bigger and that will impact our performance, right?
 
-Not exactly. This is where we talk about the *load factor*. Just like all other dynamic data structures, hashmaps should be able to resize at will! Load factor is the ratio of the number of elements in the hashmap to the number of buckets. Once we reach a certain load factor (say, 50%, 70% or 90% depending on your configuration), hashmaps will resize and *rehash* all the K/V pairs.
+Not exactly. This is where we talk about the *load factor*. Just like all other dynamic data structures, hashmaps should be able to resize at will! Load factor is the ratio of the number of elements in the hashmap to the number of buckets. Once we reach a certain load factor (say, 50%, 70% or 90% depending on your configuration), hashmaps will resize and *rehash* all the key/value pairs.
 
 Let's say that our hashmap *doubles* in size at a load factor of 60%. This means, once we add a third element `(5, 7)`, our new hashmap will resize (regardless of whether it's colliding). It will now look something like:
 
@@ -88,7 +90,7 @@ Let's say that our hashmap *doubles* in size at a load factor of 60%. This means
        -------           -------                 -------
 ```
 
-The choice of the load factor depends entirely on the internals of your map i.e., how it hashes and determines buckets. For example, you have a weaker hash function which results in adding a number of elements to the same bucket, and in order to reduce traversal, you'd probably go for a resize / rehash when you hit a *relatively lesser* load factor (note that the choice is based on a gazillion performance tests!).
+The choice of the load factor depends entirely on the internals of your map i.e., how it hashes and determines buckets. For example, you have a weaker hash function which results in adding a number of elements to the same bucket, and in order to reduce traversal, you'd probably go for a resize / rehash when you hit a *relatively lesser* load factor (the choice is based on a gazillion performance tests!).
 
 However, we have a major performance bottleneck. Firstly, the usage of external data structures require additional allocations / pointers which themselves consume some memory **per element**. And second, when it comes to linked lists, they have worse *processor* cache performance.
 
@@ -102,7 +104,7 @@ What this means is that, whenever the CPU needs to read/write to a memory locati
 
 Coming back to linked lists, the pointers of subsequent nodes could be anywhere, which results in fetching cache lines randomly. This indirection leads to the poor cache performance of linked lists.
 
-## The other way
+### The other way
 
 The second way (for our hashmap) is to get rid of using external data structures completely, and use the same array for storing values alongside buckets. With another element `(12,9)`, our map will look like this:
 
@@ -116,7 +118,9 @@ The second way (for our hashmap) is to get rid of using external data structures
 
 > I've added another row to indicate the buckets/slots computed from the hashes.
 
-Note that the new K/V pair is on index 4, even though its slot index is 3. This way, we sequentially fill the empty slots. Also, the ordering is unnecessary. Let's try and add a few more elements `(29, 7)`, `(6, 6)`, `(3, 4)`:
+Note that the new key/value pair is on index 4, even though its slot index is 3. This way, we sequentially fill the empty slots. Also, the ordering is unnecessary.
+
+Let's try and add a few more elements...
 
 ```
  index |  0  |  1   |  2  |  3  |  4   |  5  |  6  |  7  |
@@ -234,11 +238,11 @@ Now, we go looking for a place to insert `(6, 6)`. This way, we compare and swap
 
 Since the hashmap has reached almost its capacity, you might be wondering whether this would've already triggered a *rehash*. But, the resize/rehash depends on the load factor, and because this method redistributes the key/value pairs regardless of when they get inserted (**takes away from the rich and gives it to the poor**, hence the name), the hashmaps could now have higher load factors of even 90-95%.
 
-This also brings another improvement to searching. We don't have to probe all the way until we find an empty slot. We can stop when `D(slot value) < D(query value)`, since our rule guarantees that this shouldn't happen for the key we're looking for. For example, in the above table, if we wanna query for the key `21` (whose slot index is `0`), then we can stop at index `3`, because at that point `D(6) == 2` which is less than `D(21) == 3` which wouldn't have happened if the key/value pair were there. So, we can safely declare that the key doesn't exist.
+This also brings another improvement to searching. We don't have to probe all the way until we find an empty slot. We can stop when `D(slot value) < D(query value)`, since our rule guarantees that this shouldn't happen for the key we're looking for. For example, in the above table, if we wanna query for the key `21` (whose slot index is 0), then we can stop at index 3, because at that point `D(6) == 2` which is less than `D(21) == 3` which wouldn't have happened if the key/value pair were there. So, we can safely declare that the key doesn't exist.
 
 Now that we've grazed over a lot of things associated with openly-addressed hashmaps[^5], let's proceed to hashbrown.
 
-# Hashbrown
+## Hashbrown
 
 I'm not gonna call it "SwissTable" from here on because firstly, even though hashbrown was a port of SwissTable, the author has made a few changes to improve its performance, and second, I didn't read the C++ code at all - I followed the `hashbrown` crate.
 
@@ -267,7 +271,7 @@ Our first candidate for insertion is `(5, 7)`.
 H(5) = 12638147618137026400
 ```
 
-Taking the top (*most significant*) 7 bits of this hash[^7] and calling it `H2`, we get:
+Taking the top (*most significant*) 7 bits of this hash[^7] and calling it `H2(x)`, we get:
 
 ```
 H2(5) = H(5) >> 57 = 87 = 0b1010111
@@ -293,7 +297,7 @@ In light of this information, all the slots are empty, so our map will look like
 
 To recall what we've done so far, we're storing the top 7 bits of our key's hash in our control byte, and in addition to that, we use the top bit of the control byte to indicate whether the slot is full, empty or deleted.
 
-The slot index for `(5, 7)` is `0` i.e., `H(5) % 16 == 0`.
+Going back to our candidate `(5, 7)`, its slot index is 0 i.e., `H(5) % 16 == 0`.
 
 ```
  index |   0    |   1    |   2    |   3    |   4    | ... |   16   |
@@ -303,7 +307,7 @@ The slot index for `(5, 7)` is `0` i.e., `H(5) % 16 == 0`.
  ctrl  |01010111|11111111|11111111|11111111|11111111| ... |11111111|
 ```
 
-Once the pair is inserted, we simply set its control byte to `H2(5)`, since the top bit is zero anyway. Now, let's try inserting `(39, 8)`.
+Once the pair is inserted, we've also set its control byte to `H2(5)`, since the top bit is zero anyway (because it's now `FULL`). Now, let's try inserting `(39, 8)`.
 
 ```
 H(39) = 17050702200253021726
@@ -323,7 +327,7 @@ And, we do the same thing.
 
 Now, we're all set. Let's start addressing the reasons behind whatever we've done.
 
-## Why the round number?
+### Why the round number?
 
 Each group contains 16 slots summing up to 8 control bytes. The first natural question is why we've restricted the group size to 128 bits.
 
@@ -373,7 +377,7 @@ In the above example, if we wish to find `39`, then all we have to do is find th
 
 So, we have the results! Now, all we need to do is check whether the byte is set, and if it is, then compare the actual key against the querying key (for equality), find the corresponding value, and we'll land on `(39, 8)`.
 
-## Hints to compiler!
+### Hints to compiler!
 
 Futher optimizations can be done on this implementation. If we've used a good hash function that distributes the bits reasonably well, then we can hint the compiler that the final equality check (for the key) will almost always be true. This directly aids [branch prediction](https://en.wikipedia.org/wiki/Branch_predictor). In Rust, we have [`likely`](https://doc.rust-lang.org/nightly/core/intrinsics/fn.likely.html) and [`unlikely`](https://doc.rust-lang.org/nightly/core/intrinsics/fn.unlikely.html) to achieve this. So, we can [tell the compiler](https://github.com/Amanieu/hashbrown/blob/6b9cc4e01090553c5928ccc0ee4568319ee0ed33/src/raw/mod.rs#L666) that the equality is *likely* to be true.
 
