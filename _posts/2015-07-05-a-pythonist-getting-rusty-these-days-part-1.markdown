@@ -14,7 +14,7 @@ Today, I'll try to explain some things I liked about the language. The upcoming 
 
 <!-- more -->
 
-## What I'd been doing?
+### What I'd been doing?
 
 *If you're just interested only in the code, please feel free to skip this part.*
 
@@ -26,7 +26,7 @@ At this point, I realized that translating the diary is probably a bad idea. Luc
 
 To achieve that, I had two things in mind - [FFI](http://en.wikipedia.org/wiki/Foreign_function_interface) and concurrency, which Rust handled quite *nicely*. That's where my life as a *Rustacean* began.
 
-# Some things I liked...
+## Some things I liked...
 
 *I liked a lot of things when I was making the library for my diary, which I'll elaborate in this post. We'll get into FFI and concurrency in future posts (because I've got a lot of stuff in those topics).*
 

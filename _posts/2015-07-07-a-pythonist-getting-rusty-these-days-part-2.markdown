@@ -14,7 +14,7 @@ FFI was *hard*, because I can't quite guess what happens along the way. Errors d
 
 This means that there's no simple way of sending a list from Python and getting it in Rust. Both have entirely different data structures. And, we don't have to say about Rust - its clockworks are *crazier* than C or Python. But, thanks to Rust's "libc" and Python's "ctypes" libraries, which enable both the languages to communicate in C.
 
-# Establishing the Rust-Python FFI
+## Establishing the Rust-Python FFI
 
 My script was a bit *cranky*. In the Python side, we have a list of file paths, which can be sent as an array of strings. Things got somewhat complicated here. To send an array, I should create one using the `ctypes`, grab its address (a pointer) and send it along with its length.
 
@@ -140,7 +140,7 @@ lib.kill_pointer(c_pointer)     # send the pointer back for hack & slash!
 
 In Python, I get the pointer, extract the string from it, and send it back to Rust. So, I (had to) create a function in Rust to just *kill* this ugly pointer. The `CString::from_raw` consumes the pointer and produces a `CString` for Rust, which then gets deallocated as the scope runs out of life, which means that the obtained `CString` should be destroyed.[^5] And, the processes are now memory safe!
 
-## So much for the FFI. What are the perks?
+### So much for the FFI. What are the perks?
 
 Only one - *performance*. The decrypting & searching (of ~200 files) took about a minute in Python, whereas Rust did it in ~0.4 seconds!
 
