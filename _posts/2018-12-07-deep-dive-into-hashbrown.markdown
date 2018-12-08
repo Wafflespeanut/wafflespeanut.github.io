@@ -256,7 +256,7 @@ Let's reset our map and make some changes to its behavior.
 It will now look something like this:
 
 ```
- index |   0    |   1    |   2    |   3    |   4    | ... |   16   |
+ index |   0    |   1    |   2    |   3    |   4    | ... |   15   |
 -------|--------|--------|--------|--------|--------|     |--------|
  value |        |        |        |        |        | ... |        |
 -------|--------|--------|--------|--------|--------|     |--------|
@@ -288,7 +288,7 @@ These will be the *bottom* 7 bits of our control byte.[^8] Then, we use a specia
 In light of this information, all the slots are empty, so our map will look like:
 
 ```
- index |   0    |   1    |   2    |   3    |   4    | ... |   16   |
+ index |   0    |   1    |   2    |   3    |   4    | ... |   15   |
 -------|--------|--------|--------|--------|--------|     |--------|
  value |        |        |        |        |        | ... |        |
 -------|--------|--------|--------|--------|--------|     |--------|
@@ -300,7 +300,7 @@ To recall what we've done so far, we're storing the top 7 bits of our key's hash
 Going back to our candidate `(5, 7)`, its slot index is 0 i.e., `H(5) % 16 == 0`.
 
 ```
- index |   0    |   1    |   2    |   3    |   4    | ... |   16   |
+ index |   0    |   1    |   2    |   3    |   4    | ... |   15   |
 -------|--------|--------|--------|--------|--------|     |--------|
  value | (5,7)  |        |        |        |        | ... |        |
 -------|--------|--------|--------|--------|--------|     |--------|
@@ -318,7 +318,7 @@ H2(39) = H(39) >> 57 = 54 = 0b110110
 And, we do the same thing.
 
 ```
- index |   0    |   1    |   2    |   3    |   4    | ... |   16   |
+ index |   0    |   1    |   2    |   3    |   4    | ... |   15   |
 -------|--------|--------|--------|--------|--------|     |--------|
  value | (5,7)  |        | (39,8) |        |        | ... |        |
 -------|--------|--------|--------|--------|--------|     |--------|
