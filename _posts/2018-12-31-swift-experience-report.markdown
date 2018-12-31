@@ -10,7 +10,7 @@ I've been using Swift for over a year now, mostly for the [decentralized e-comme
 
 A few things about this write-up. Firstly, I love the language![^2] And second, even though I'll be comparing bits of both the languages, I'll never say that one is better than the other. Both are amazing languages and they aim to solve different things. Also, I began using Rust from around its 1.0 release (about 3.5 years back), and Swift only *after* its 4.0 release (last year), so I'll be talking about the features they currently have, not what they had / lacked ages ago!
 
-> As a side-note, don't expect this post to be a tutorial or have in-depth discussion about the internals or have some sort of order in the comparison.
+> As a side-note, please don't expect this post to be a tutorial or have in-depth discussions about language internals or have some sort of order in comparisons.
 
 <!-- more -->
 
@@ -54,11 +54,13 @@ fn get_env_variable(name: &str) -> Option<String> {
 let port = get_env_variable("LISTEN_PORT").unwrap();
 ```
 
+Similar, right?
+
 ### Imports, optionals and argument labels
 
-`import` syntax was probably the first thing I felt weird about. It's like a "recursive glob import". In Rust, you need to be very specific about what you wanna use in your module, but here you import a package at the top of the file, and **you get to use all** (public) stuff from that package! This means, if we'd imported multiple libs, then it's hard to know (without an IDE) where some item (type / function / whatever) is from - not to mention that we also need to `grep` the item in that lib to find wherever it's located.
+`import` syntax was probably the first thing I felt weird about. It's like a "recursive glob import". In Rust, you need to be very specific about what you want in your module, but here you import a package at the top of the file, and **you get to use all** (public) stuff from that package! This means, if we'd imported multiple libs, then it's hard to know (without an IDE) where some item (type / function / whatever) is from - not to mention that we also need to `grep` the item in that lib to find wherever it's located.
 
-In order to reduce the burden, Swift devs arrange their modules in such a way that they're self-explanatory. An example would be Vapor's [PostgreSQL driver lib](https://github.com/vapor/postgresql). There, we have [`PostgreSQLConnection` type in its own module](https://github.com/vapor/postgresql/blob/92881d8b29b7fef572b0d3d56b71527e8a4baeca/Sources/PostgreSQL/Connection/PostgreSQLConnection.swift), but then we have [a number of `PostgreSQLConnection+Foo.swift` files](https://github.com/vapor/postgresql/tree/92881d8b29b7fef572b0d3d56b71527e8a4baeca/Sources/PostgreSQL/Connection) that contain additional implementations for that type related to some behavior `"Foo"` (in a different module).
+In order to reduce the burden, Swift devs arrange their modules in such a way that they're self-explanatory. An example would be Vapor's [PostgreSQL driver lib](https://github.com/vapor/postgresql). There, we have [`PostgreSQLConnection` type in its own module](https://github.com/vapor/postgresql/blob/92881d8b29b7fef572b0d3d56b71527e8a4baeca/Sources/PostgreSQL/Connection/PostgreSQLConnection.swift), but then we also have [a number of `PostgreSQLConnection+Foo.swift` files](https://github.com/vapor/postgresql/tree/92881d8b29b7fef572b0d3d56b71527e8a4baeca/Sources/PostgreSQL/Connection) that contain additional implementations for that type related to some behavior "Foo" (in different modules).
 
 Then, there are the optionals. In Rust, `Option` is [just like any other enum]((https://doc.rust-lang.org/std/option/enum.Option.html)), which means `None` is just another value. In Swift, even though [`Optional` is an enum](https://github.com/apple/swift/blob/0d4a5853bf665eb860ad19a16048664899c6cce3/stdlib/public/core/Optional.swift#L122), it's baked into the compiler such that `?` operator (in suffix) represents an optional type, which means `nil` is a special value to indicate nothing. As a result of this, unwrapping an optional can be as simple as using another (exclamation `!`) operator.
 
@@ -74,9 +76,9 @@ try updateConsumedInventory(for: inventoryItem, with: product, in: unit)
 
 With labeling, it's possible to write some cool expressive code.
 
-### `try...catch`
+### try ... catch
 
-In Swift, `Error` is a *protocol* (interface) which can be implemented for any type, just like Rust, where [it's a trait](https://doc.rust-lang.org/std/error/trait.Error.html). Only difference is that here, an error value can be *thrown* by some operation and can be *caught* elsewhere when it bubbles up.
+In Swift, `Error` is a *protocol* (interface, if you want) which can be implemented for any type, just like Rust, where [it's a trait](https://doc.rust-lang.org/std/error/trait.Error.html) (another buzzword!). Only difference is that here, an error value can be *thrown* by some operation and can be *caught* elsewhere when it bubbles up.
 
 To see this in action, let's write a function which throws 95% of the time:
 
@@ -111,7 +113,7 @@ do {
 }
 ```
 
-The `do { }` block represents your *trial* area, and you *catch* the error next to that block. It's worth mentioning that when you `throw` your error value, the actual error type is erased (since it gets casted to the `Error` interface), so you can throw any kind of error from the same block (if you've got good reason). Later, when you `catch`, you can pattern match by casting it back to the actual error type.[^3]
+The `do { }` block represents your *trial* area, and you *catch* the error next to that block. It's worth mentioning that when you `throw` your error value, the actual error type is erased (since it gets casted to the `Error` interface), so you can throw any kind of error from the same block (if you've got good reason to do that). Later, when you `catch`, you can pattern match by casting it back to the actual error type.[^3]
 
 ## Types
 
@@ -128,7 +130,7 @@ extension String {
 }
 ```
 
-We've just added some functionality to a type that doesn't belong to us! It's an useful abstraction, yes, but Rust doesn't allow you to do this,[^4] and I think there's a good reason for it. When you start extending stuff you don't own, users will have trouble finding the implementation - whether it's from your package, or it's from a dependency, or whether they've been unaware of the existence of this implementation in a core package.
+We've just added some functionality to a type that doesn't belong to us! It's an useful abstraction, yes, but Rust doesn't allow you to do this,[^4] and I think there's a good reason for it. When you start extending stuff you don't own, users will have trouble finding the implementation - whether it's from your package, or it's from a dependency, or whether this has existed in a core package all this time!
 
 That said, I'm not against it either (I'm doing it myself!). I'm simply unsure about the downsides (if any) to not using / having this feature.
 
@@ -170,12 +172,12 @@ public struct Customer {
 I'm ambivalent about having methods as part of the type itself, but other than that, I like a number of things here:[^6]
 
  1. **Foundation has a lot of stuff!** So far, we've seen random number generation, regex, UUID and datetime. It's nice to have all these things in stdlib, so it's one less worry for us.
- 2. Mutation is field-specific. In the above example, `id` cannot be changed for an instance (even if it's mutable).
+ 2. Mutation is field-specific. In the above example, `id` cannot be changed for an instance (even if the instance itself is mutable).
  3. Functions could have the same names, as long as they have different signatures. `init` is special (in that it's the constructor), but it's no different from any other function.
 
 ### Values and References
 
-All classes in Swift are "reference types" and all other types are "value types". The difference is that **value types are copied**. Coming from Rust, this felt like *infidelity*, but well, that's what you pay for languages with automatic memory management. Arrays and dictionaries are structs, so every time you assign them to some variable or pass them to another function, they get copied!
+All classes in Swift are "reference types" and all other types are "value types". The difference is that instances of **value types are copied**. Coming from Rust, this felt like *infidelity*, but well, that's what you pay for using languages with automatic memory management. Arrays and dictionaries are structs, so every time you assign them to some variable or pass them to another function, they get copied!
 
 ```swift
 var a = [0, 2, 5, 10]   // array is a struct
@@ -205,13 +207,13 @@ impl MyTrait for T where T: MyOtherTrait {
 
 It hasn't been a big deal for me yet, just saying.
 
-Otherwise, protocols are quite cool. Some examples include a protocol for [types that can be represented with a raw value](https://developer.apple.com/documentation/swift/rawrepresentable), protocols for [hashing](https://developer.apple.com/documentation/swift/hashable), [equality](https://developer.apple.com/documentation/swift/equatable), [iteration](https://developer.apple.com/documentation/swift/sequence), etc. (just like Rust).
+Otherwise, protocols are quite cool. There's a protocol for [hashing](https://developer.apple.com/documentation/swift/hashable), [equality](https://developer.apple.com/documentation/swift/equatable) and [iteration](https://developer.apple.com/documentation/swift/sequence) (just like Rust), and there are others like one [for types that could be raw values](https://developer.apple.com/documentation/swift/rawrepresentable), [encoding](https://developer.apple.com/documentation/swift/encodable) and [decoding](https://developer.apple.com/documentation/swift/decodable).
 
-Swift also has [`Codable`](https://developer.apple.com/documentation/swift/codable) for serialization and deserialization (again, built into Foundation). The problem is that it's not even close to [serde](https://serde.rs/), which is the commonly used encoding / decoding lib.
+Then, there's [`Codable`](https://developer.apple.com/documentation/swift/codable) which unifies serialization and deserialization (again, built into Foundation). The problem is that it's not even close to [serde](https://serde.rs/), which is the commonly used encoding / decoding lib in Rust.
 
-In serde, you can do almost anything with a bunch of attributes (you rarely need to write custom code), which is a great perk for using a statically typed language, whereas in Swift, if you need to skip a property, manage a particular property on your own or perform additional validation, anything that deviates even a little **requires custom code**. It's not hard to write, but it's difficult to maintain - whenever you alter the structs, you need to modify that custom implementation. It'd be nice if it could be done with less effort.
+In serde, you can do almost anything with a bunch of attributes (you rarely need to write custom code), which is a great perk for using a statically typed language, whereas in Swift, let it be skipping a property, managing a particular property on your own or performing additional validation, **anything** that deviates even a little **requires custom code**. It's not hard to write, but it's difficult to maintain - whenever you alter the structs, you need to modify that custom implementation. It'd be nice if it could be done with less effort.
 
-If there's one thing I like about Swift protocols, then it's automatic box'ing. In Rust, you need to specify the pointer which holds a particular [trait object](https://doc.rust-lang.org/book/ch17-02-trait-objects.html) - it's always been and should always be that way in Rust, I'm just saying that it's sometimes annoying (depending on the use case) to box stuff on our own.
+If there's one thing I like about Swift protocols, it's automatic box'ing (another perk of managed languages). In Rust, you need to specify the pointer which holds a particular [trait object](https://doc.rust-lang.org/book/ch17-02-trait-objects.html). I don't want this to change. It's always been and should always be that way in Rust (I need to know whether I'm using `Box`, `Arc` or a simple reference), it's just that it's sometimes annoying (depending on the use case) to box stuff on our own when you're dealing with trait objects.
 
 ## Packaging
 
@@ -223,11 +225,13 @@ I also liked SPM's model - a package has a name, a number of products (libraries
 
 I think Swift and Rust have a number of similarities in their features (other than the obvious differences).[^9] I have a blind wish that it gets procedural macros from Rust at some point!
 
-It didn't require much effort for someone coming from Rust to jump into Swift (but I guess that's the case for jumping from Rust into any language, because well... we've learned from the master!). I like the way things are in Swift right now, and I'm looking forward to where it's headed.
+Anyway, it didn't require much effort for someone coming from Rust to get into Swift (but I guess that's the case for jumping from Rust into any other language, because well... we've learned from the master!). I like the way things are in Swift right now, and I'm looking forward to where it's headed.
+
+If I were to write a web service today, then Swift will be my choice without any second thoughts.
 
 ---
 
-<small>I may have left out some things along the way, but I'll update the post if something comes to mind.</small>
+<small>I may have left out some things along the way, but I'll update the post whenever something comes to mind.</small>
 
 [^1]: I don't think I'll be able to write about my WebID-TLS work just yet. I've been diagnosed with [CTS](https://en.wikipedia.org/wiki/Carpal_tunnel_syndrome) lately, and it's ascending, so I'll probably be taking a break from my computer starting this February or something and I need to wrap up some work before that.
 
@@ -245,4 +249,4 @@ It didn't require much effort for someone coming from Rust to jump into Swift (b
 
 [^8]: Unit tests in Rust need to exist in the same module. They can stay outside, but they won't have access to any internally used types. Also, a Rust project can output any number of libs, but only one executable.
 
-[^9]: Speaking of the future, Swift has[NIO](https://github.com/apple/swift-nio) for event loops and futures (again, somewhat similar to Rust).
+[^9]: Speaking of the future, Swift has [NIO](https://github.com/apple/swift-nio) for event loops and futures (again, somewhat similar to Rust).
