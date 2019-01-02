@@ -117,7 +117,7 @@ The `do { }` block represents your *trial* area, and you *catch* the error next 
 
 ## Types
 
-All types in Swift can be *extended* - including the ones in Foundation. For example, we could extend strings with an alphanumeric check like so:
+All types (and protocols) in Swift can be *extended* - regardless of whether they're from a foreign package, like Foundation. For example, we could extend strings with an alphanumeric check like so:
 
 ```swift
 import Foundation
@@ -205,7 +205,23 @@ impl MyTrait for T where T: MyOtherTrait {
 }
 ```
 
-It hasn't been a big deal for me yet, just saying.
+This translates to, "Implement `MyTrait` for **all types** that implement `MyOtherTrait`". This has some wonderful effects. [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) and [`Into`](https://doc.rust-lang.org/std/convert/trait.Into.html) traits are my favorites. If your type implements `From`, then (because of this feature) it gets the `Into` implementation for free!
+
+In Swift, you can add a protocol extension with such a constraint.
+
+```swift
+extension MyProtocol where Self: MyOtherProtocol {
+    // MyProtocol impl
+}
+```
+
+But, this doesn't automatically apply the implementation for all `MyOtherProtocol` implementors. You still need to extend your types *specifically* and mark them like:
+
+```swift
+extension MyStruct: MyProtocol {}
+```
+
+This hasn't become a big deal for me yet, just saying.
 
 Otherwise, protocols are quite cool. There's a protocol for [hashing](https://developer.apple.com/documentation/swift/hashable), [equality](https://developer.apple.com/documentation/swift/equatable) and [iteration](https://developer.apple.com/documentation/swift/sequence) (just like Rust), and there are others like one [for types that could be raw values](https://developer.apple.com/documentation/swift/rawrepresentable), [encoding](https://developer.apple.com/documentation/swift/encodable) and [decoding](https://developer.apple.com/documentation/swift/decodable).
 
@@ -219,7 +235,7 @@ If there's one thing I like about Swift protocols, it's automatic box'ing (anoth
 
 [Swift Package Manager](https://github.com/apple/swift-package-manager/blob/ad40fc69276d5dafd213af9b3aafca1cccd6fe3c/Documentation/PackageDescriptionV4.md) reminded me of [build scripts](https://doc.rust-lang.org/cargo/reference/build-scripts.html) in Rust, because you write in Swift to build your Swift package, and I like it. But, there's no central registry upon which SPM relies on (like [crates.io](https://crates.io/) for cargo). Instead, it needs Git. In order to specify a package as a dependency, you have to specify the URL of a git repo, and versions are based on tags. That said, you can specify a branch / revision in that repo, or simply use your local path - everything works, so I haven't had any trouble with it.
 
-I also liked SPM's model - a package has a name, a number of products (libraries and executables), dependencies and targets. Products depend on targets. Tests are part of targets (called test targets). This means, a package can output any number of executables and libraries, and tests can be located anywhere (typically they're inside `Tests/` in project root). This is not permitted by Rust.[^8]
+I also liked SPM's model - a package has a name, a number of products (libraries and executables), dependencies and targets. Products depend on targets. Tests are part of targets (called test targets). This means, a package can output any number of executables and libraries, and tests can be located anywhere (typically they're inside `Tests/` in project root). In Rust, we can use [workspaces](https://doc.rust-lang.org/cargo/reference/manifest.html#the-workspace-section) to output multiple products, but unit tests cannot exist elsewhere.[^8]
 
 ## The Future
 
@@ -247,6 +263,6 @@ If I were to write a web service today, then Swift will be my choice without any
 
 [^7]: Although, protocols marked with `class` can only be implemented by classes.
 
-[^8]: Unit tests in Rust need to exist in the same module. They can stay outside, but they won't have access to any internally used types. Also, a Rust project can output any number of libs, but only one executable.
+[^8]: They need to exist in the same module. They can stay outside, but they won't have access to any internally used types, whereas in Swift, you can mark packages as `@testable` in imports just for testing.
 
 [^9]: Speaking of the future, Swift has [NIO](https://github.com/apple/swift-nio) for event loops and futures (again, somewhat similar to Rust).
