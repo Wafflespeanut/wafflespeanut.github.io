@@ -16,7 +16,4 @@ plugins:
 
 permalink: /:year/:month/:day/:title/
 
-disqus:
-    shortname: wafflespeanut
-
 google_analytics: UA-64401105-1
